@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day # 02</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            min-height: 100vh;
+            background: linear-gradient(rgba(38, 38, 194, 0.705),blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock
+        {
+            
+            width: 30rem;
+            height: 30rem;
+            border-radius: 50%;
+            padding: 1.8rem;
+            margin: 4.4rem;
+            
+        }
+        .clockface
+        {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .hands
+        {
+            position: absolute;
+            top: 50%;
+            height: 8px;
+            width: 50%;
+            background-color: black;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            border-radius: 50% 0px 0px 50%;
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0, 2.38);
+            box-shadow: 0px 0px 3px black;
+            
+
+        }
+        .face{
+        background: url(face.png) no-repeat center center/cover;
+        } 
+        
+        
+    </style>
+</head>
+<body>
+    <div class="face">
+    <div class="clock">
+        <div class="clockface">
+            <div class="hands secondhand"></div>
+            <div class="hands minhand"></div>
+            <div class="hands hourhand"></div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+
+        const secondhand=document.querySelector(".secondhand");
+        const minhand=document.querySelector(".minhand");
+        const hourhand=document.querySelector(".hourhand");
+
+
+        function setDate()
+        {
+            const dateNow= new Date();
+            const seconds= dateNow.getSeconds();
+            const seconddegree= ((seconds/60)*360 + 90);
+            secondhand.style.transform=`rotate(${seconddegree}deg)`;
+
+            if(seconddegree==358)
+            {
+                secondhand.style.transition="none !important"
+            }
+
+            
+            const minutes= dateNow.getMinutes();
+            const mindegree= ((minutes/60)*360 + 90);
+            minhand.style.transform=`rotate(${mindegree}deg)`;
+            if(mindegree==358)
+            {
+                minhand.style.transition="none !important"
+            }
+
+            
+            const hours= dateNow.getHours();
+            const hourdegree= ((hours/12)*360 + 90);
+            hourhand.style.transform=`rotate(${hourdegree}deg)`;
+            if(hourdegree==358)
+            {
+                hourhand.style.transition="none !important"
+            }
+
+            
+
+        }
+
+        setInterval(setDate,1000);
+    </script>
+</body>
+</html>
