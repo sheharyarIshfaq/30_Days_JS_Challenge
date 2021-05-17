@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day # 03</title>
+
+    <style>
+        *
+        {
+            box-sizing: border-box;
+        }
+        :root{
+            --basecolor: #fcc630;
+            --spacing:10px;
+            --blur:10px;
+            --bgcolor:#134579;
+            --textcolor:#fff;
+        }
+        body
+        {
+            text-align: center;
+            font-size: 2rem;
+            background-color: var(--bgcolor);
+            color: var(--textcolor);
+
+        }
+        .elements
+        {
+            margin-bottom: 70px;
+        }
+        input{
+            margin-right: 40px;
+            width: 100px;
+        }
+        img
+        {
+            width: 700px;
+            padding: var(--spacing);
+            background-color: var(--basecolor);
+            filter: blur(var(--blur));
+        }
+        .highlight
+        {
+            color: var(--basecolor);
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h2>Updating CSS Variables with <span class="highlight">JS</span></h2>
+
+    <div class="elements">
+        
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" min="10" max="100" value="10" data-sizing="px">
+
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+        <label for="basecolor">Base Color:</label>
+        <input type="color" value="#fcc630" name="basecolor">
+
+        <label for="bgcolor">Background Color:</label>
+        <input type="color" name="bgcolor" value="#134579">
+
+        <label for="textcolor">Text Color:</label>
+        <input type="color" name="textcolor" value="#ffffff">
+    </div>
+
+    <img src="img.jpg" alt="">
+
+    <script>
+
+        function handler()
+        {
+            const suffix= this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+        }
+
+        const inputs=document.querySelectorAll('.elements input');
+
+        inputs.forEach(input => input.addEventListener('change', handler));
+        inputs.forEach(input => input.addEventListener('mousemove', handler));
+
+
+
+    </script>
+</body>
+</html>
